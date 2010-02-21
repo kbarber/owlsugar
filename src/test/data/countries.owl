@@ -1,0 +1,549 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xml:base="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo>Version 0.1</owl:versionInfo>
+    <rdfs:comment>Countries Ontology
+
+Created by Jenz &amp; Partner GmbH
+
+Version 0.1, 28-FEB-2004</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="UnclaimableTerritory">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Country"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependentState"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#VirtuallyAnnexedTerritory"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#FullyDependentTerritory"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#VirtualTerritory"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependenceDisputedState"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AssociatedState"/>
+    </owl:disjointWith>
+    <rdfs:comment>No government body exists. The territory is not or cannot be claimed by an independent country.
+
+Example: Antarctica is unclaimed resp. unclaimable territory. An Antarctic Treaty was negotiated that neither denies nor gives recognition to existing territorial claims.</rdfs:comment>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#OccupiedTerritory"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="VirtuallyAnnexedTerritory">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AssociatedState"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#VirtualTerritory"/>
+    </owl:disjointWith>
+    <rdfs:comment>No government body exists, or, if one exists, it is not given recognition by the annexing country. The territory has been unilaterally annexed by some independent country, usually as a result of occupation. The annexing country imposes its legislation on the annexed territory and considers it an integral part of its own territory.
+
+Example: The Western Sahara has been virtually annexed by Morocco.</rdfs:comment>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#OccupiedTerritory"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#UnclaimableTerritory"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Country"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependentState"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependenceDisputedState"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#annexedTerritoryOf"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#FullyDependentTerritory"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="OccupiedTerritory">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="#territoryOccupiedBy"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#FullyDependentTerritory"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependenceDisputedState"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#UnclaimableTerritory"/>
+    <owl:disjointWith rdf:resource="#VirtuallyAnnexedTerritory"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependentState"/>
+    </owl:disjointWith>
+    <rdfs:comment>An existing government body is only given limited recognition by the occupying country. The territory has been unilaterally (temporarily) occupied by some independent country, possibly as a result of war. The occupying country may impose its legislation on the occupied territory, and allow limited autonomy in the occupied territory. The occupied territory is not an integral part of the occupying country. Occupation may lead to formal annexation.
+
+Example: Dispute over Palestinian territory.</rdfs:comment>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#VirtualTerritory"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AssociatedState"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Country"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="FullyDependentTerritory">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Country"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependenceDisputedState"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependentState"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#OccupiedTerritory"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AssociatedState"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#UnclaimableTerritory"/>
+    <rdfs:comment>Self-governing to some limited degree; considered an integral part of an independent country.
+
+Example: Christmas Island is a territory of Australia; administered by the Australian Department of Transport and Regional Services. Christmas Island does not have the right to move to full independence by unilateral action.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="#dependentTerritoryOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#VirtualTerritory"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#VirtuallyAnnexedTerritory"/>
+  </owl:Class>
+  <owl:Class rdf:ID="IndependenceDisputedState">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#sovereigntyChallengedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Country"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#VirtualTerritory"/>
+    </owl:disjointWith>
+    <rdfs:comment>A disputed state is regarded as an independent state by its own population (or at least the majority of them) and has been recognized as independent by some international body (e.g. the U.N.) at some point in the past. However, a disputed territory's status of independence is questioned by some other independent country/countries.  
+
+Example: The Republic of China (Taiwan) and the People's Republic of China hold differing views on the sovereignty of Taiwan.</rdfs:comment>
+    <owl:disjointWith rdf:resource="#FullyDependentTerritory"/>
+    <owl:disjointWith rdf:resource="#OccupiedTerritory"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AssociatedState"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#VirtuallyAnnexedTerritory"/>
+    <owl:disjointWith rdf:resource="#UnclaimableTerritory"/>
+  </owl:Class>
+  <owl:Class rdf:ID="VirtualTerritory">
+    <rdfs:comment>A virtual territory does not exist in reality. 
+
+Example: France, Metropolitan, is limited to the European part of France, excluding overseas territories.</rdfs:comment>
+    <owl:disjointWith rdf:resource="#UnclaimableTerritory"/>
+    <owl:disjointWith rdf:resource="#OccupiedTerritory"/>
+    <owl:disjointWith rdf:resource="#VirtuallyAnnexedTerritory"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#IndependentState"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#IndependenceDisputedState"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AssociatedState"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#FullyDependentTerritory"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Country"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="IndependentState">
+    <owl:disjointWith rdf:resource="#VirtuallyAnnexedTerritory"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Country"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith rdf:resource="#UnclaimableTerritory"/>
+    <owl:disjointWith rdf:resource="#FullyDependentTerritory"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AssociatedState"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#OccupiedTerritory"/>
+    <rdfs:comment>Fully self-governing and sovereign. A portion of legislative power may be transfered voluntarily to some other political body (e.g. the European Union) at the government's discretion.
+
+Example: The Federal Republic of Germany enjoys sovereignty and is self-governing. It is part of the European Union. The European Parliament is given authority to produce laws in certain fields, which are considered binding by every member.</rdfs:comment>
+    <owl:disjointWith rdf:resource="#VirtualTerritory"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ISO3166DefinedCountry">
+    <rdfs:comment>The International Standards Organization (ISO) maintains a list of country codes since 1974. Other standards bodies have adopted the ISO 3166 code list.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="#countryCodeISO3166Alpha2"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="#countryCodeISO3166Alpha3"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#countryCodeUNNumeric3"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="#referencesCountry"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#countryNameISO3166Short"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="AssociatedState">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="#associatedTerritoryOf"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith rdf:resource="#UnclaimableTerritory"/>
+    <owl:disjointWith rdf:resource="#VirtualTerritory"/>
+    <owl:disjointWith rdf:resource="#IndependenceDisputedState"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Country"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith rdf:resource="#VirtuallyAnnexedTerritory"/>
+    <owl:disjointWith rdf:resource="#FullyDependentTerritory"/>
+    <owl:disjointWith rdf:resource="#OccupiedTerritory"/>
+    <owl:disjointWith rdf:resource="#IndependentState"/>
+    <rdfs:comment>Self-governing in free association with some independent country. An assoiated state is neither occupied nor annexed, nor is its territory considered an integral part of the country it is associated with.
+
+Example: Cook Islands is fully responsible for internal affairs; New Zealand retains responsibility for external affairs and defense, in consultation with the Cook Islands. Cook Islands has the right at any time to move to full independence by unilateral action.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Country">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#nameLocalLong"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#nameEnglishLong"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="#nameEnglish"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#nameLocal"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment>A political state or nation or its territory (see Merriam-Webster Dictionary).
+
+The presentation of the material in this electronic publication does not imply the expression of any opinion whatsoever on the part of Jenz &amp; Partner concerning the legal status of any country, territory, city or area, or of its authorities, or concerning the delimitations of its frontiers or boundaries.</rdfs:comment>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="challengesSovereigntyOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#sovereigntyChallengedBy"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#IndependentState"/>
+    <rdfs:range rdf:resource="#IndependenceDisputedState"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sovereigntyChallengedBy">
+    <rdfs:range rdf:resource="#IndependentState"/>
+    <rdfs:domain rdf:resource="#IndependenceDisputedState"/>
+    <owl:inverseOf rdf:resource="#challengesSovereigntyOf"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasOccupiedTerritory">
+    <owl:inverseOf>
+      <owl:FunctionalProperty rdf:about="#territoryOccupiedBy"/>
+    </owl:inverseOf>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#IndependenceDisputedState"/>
+          <owl:Class rdf:about="#IndependentState"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#OccupiedTerritory"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="annexedTerritoryOf">
+    <rdfs:range rdf:resource="#IndependentState"/>
+    <rdfs:domain rdf:resource="#VirtuallyAnnexedTerritory"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hasAnnexedTerritory"/>
+    </owl:inverseOf>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasDependentTerritory">
+    <owl:inverseOf>
+      <owl:FunctionalProperty rdf:about="#dependentTerritoryOf"/>
+    </owl:inverseOf>
+    <rdfs:range rdf:resource="#FullyDependentTerritory"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#IndependentState"/>
+          <owl:Class rdf:about="#IndependenceDisputedState"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasAssociatedTerritory">
+    <rdfs:range rdf:resource="#AssociatedState"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#IndependentState"/>
+          <owl:Class rdf:about="#IndependenceDisputedState"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf>
+      <owl:FunctionalProperty rdf:about="#associatedTerritoryOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasAnnexedTerritory">
+    <rdfs:range rdf:resource="#VirtuallyAnnexedTerritory"/>
+    <owl:inverseOf rdf:resource="#annexedTerritoryOf"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#IndependentState"/>
+          <owl:Class rdf:about="#IndependenceDisputedState"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="nameLocalLong">
+    <rdfs:domain rdf:resource="#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="countryNameISO3166Short">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#ISO3166DefinedCountry"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="modificationTimestamp">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="nameLocal">
+    <rdfs:domain rdf:resource="#Country"/>
+    <rdfs:comment>The name of the country in local language, using ISO-8859 characters.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="countryNameISO3166OfficialName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#ISO3166DefinedCountry"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="countryCodeUNNumeric3">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#ISO3166DefinedCountry"/>
+    <rdfs:comment>UN Numeric Code</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="nameEnglishLong">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Country"/>
+  </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:ID="effectiveFrom">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#VirtuallyAnnexedTerritory"/>
+          <owl:Class rdf:about="#AssociatedState"/>
+          <owl:Class rdf:about="#FullyDependentTerritory"/>
+          <owl:Class rdf:about="#IndependenceDisputedState"/>
+          <owl:Class rdf:about="#IndependentState"/>
+          <owl:Class rdf:about="#OccupiedTerritory"/>
+          <owl:Class rdf:about="#UnclaimableTerritory"/>
+          <owl:Class rdf:about="#VirtualTerritory"/>
+          <owl:Class rdf:about="#ISO3166DefinedCountry"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:comment>The date when an entry becomes effective.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="countryCodeISO3166Alpha3">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>ISO 3166 Alpha 3</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#ISO3166DefinedCountry"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="revocationEffective">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#VirtuallyAnnexedTerritory"/>
+          <owl:Class rdf:about="#AssociatedState"/>
+          <owl:Class rdf:about="#FullyDependentTerritory"/>
+          <owl:Class rdf:about="#IndependenceDisputedState"/>
+          <owl:Class rdf:about="#IndependentState"/>
+          <owl:Class rdf:about="#OccupiedTerritory"/>
+          <owl:Class rdf:about="#UnclaimableTerritory"/>
+          <owl:Class rdf:about="#VirtualTerritory"/>
+          <owl:Class rdf:about="#ISO3166DefinedCountry"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:comment>The date when a revocation of an entry becomes effective.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="referencedByISO3166">
+    <owl:inverseOf>
+      <owl:FunctionalProperty rdf:about="#referencesCountry"/>
+    </owl:inverseOf>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="#ISO3166DefinedCountry"/>
+    <rdfs:domain rdf:resource="#Country"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="deletionTimestamp">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="nameEnglish">
+    <rdfs:comment>The name of the country in the English language</rdfs:comment>
+    <rdfs:domain rdf:resource="#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="dependentTerritoryOf">
+    <owl:inverseOf rdf:resource="#hasDependentTerritory"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="#IndependentState"/>
+    <rdfs:domain rdf:resource="#FullyDependentTerritory"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="referencesCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="#ISO3166DefinedCountry"/>
+    <owl:inverseOf rdf:resource="#referencedByISO3166"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#VirtuallyAnnexedTerritory"/>
+          <owl:Class rdf:about="#AssociatedState"/>
+          <owl:Class rdf:about="#FullyDependentTerritory"/>
+          <owl:Class rdf:about="#IndependenceDisputedState"/>
+          <owl:Class rdf:about="#IndependentState"/>
+          <owl:Class rdf:about="#OccupiedTerritory"/>
+          <owl:Class rdf:about="#UnclaimableTerritory"/>
+          <owl:Class rdf:about="#VirtualTerritory"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="countryCodeISO3166Alpha2">
+    <rdfs:comment>ISO 3166 Alpha 2</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#ISO3166DefinedCountry"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="territoryOccupiedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="#hasOccupiedTerritory"/>
+    <rdfs:domain rdf:resource="#OccupiedTerritory"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#IndependentState"/>
+          <owl:Class rdf:about="#IndependenceDisputedState"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="associatedTerritoryOf">
+    <rdfs:range rdf:resource="#IndependentState"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="#AssociatedState"/>
+    <owl:inverseOf rdf:resource="#hasAssociatedTerritory"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="creationTimestamp">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 1.0, Build 82)  http://protege.stanford.edu -->

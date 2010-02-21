@@ -1,0 +1,346 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns="http://www.ea3888.univ-rennes1.fr/ontology/demoHierarchyVisualization.owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.ea3888.univ-rennes1.fr/ontology/demoHierarchyVisualization.owl">
+  <owl:Ontology rdf:about="">
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2007-02-26</dc:date>
+    <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Olivier Dameron</dc:creator>
+    <rdfs:comment xml:lang="en">Simplistic ontology for demonstrating the possibility to use non symetric relations other than is-a for displaying hierarchies</rdfs:comment>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.0</owl:versionInfo>
+    <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="RightLittleFinger">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="LeftLittleFinger"/>
+    </owl:disjointWith>
+    <rdfs:label xml:lang="en">Right little finger</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="LittleFinger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#LeftLittleFinger">
+    <owl:disjointWith rdf:resource="#RightLittleFinger"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#LittleFinger"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Left little finger</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Hand">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Arm"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Palm"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Index"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasDirectPart"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasDirectPart"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Thumb"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasDirectPart"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#Palm"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Digit"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AnatomicalEntity"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Hand</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="RingFinger"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasDirectPart"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#LittleFinger"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasDirectPart"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Medius"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasDirectPart"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Thumb">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Digit"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="LeftThumb"/>
+          <owl:Class rdf:ID="RightThumb"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:label xml:lang="en">Thumb</rdfs:label>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#LittleFinger"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#RingFinger"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Medius"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Index"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="#Arm">
+    <rdfs:label xml:lang="en">Arm</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasDirectPart"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#Hand"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AnatomicalEntity"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Digit"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Palm"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Hand"/>
+  </owl:Class>
+  <owl:Class rdf:ID="LeftIndex">
+    <rdfs:label xml:lang="en">Left index</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Index"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="RightIndex"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="#RightIndex">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Index"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Right index</rdfs:label>
+    <owl:disjointWith rdf:resource="#LeftIndex"/>
+  </owl:Class>
+  <owl:Class rdf:about="#LeftThumb">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#RightThumb"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="#Thumb"/>
+    <rdfs:label xml:lang="en">Left thumb</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="LeftMedius">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="RightMedius"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Medius"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Left medius</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Digit">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Palm"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Hand"/>
+    <owl:disjointWith rdf:resource="#Arm"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AnatomicalEntity"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Digit</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#LittleFinger">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#RingFinger"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Medius"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Index"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Thumb"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#LeftLittleFinger"/>
+          <owl:Class rdf:about="#RightLittleFinger"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="#Digit"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Little finger</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="RightRingFinger">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="LeftRingFinger"/>
+    </owl:disjointWith>
+    <rdfs:label xml:lang="en">Right ring finger</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#RingFinger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Palm">
+    <owl:disjointWith rdf:resource="#Digit"/>
+    <owl:disjointWith rdf:resource="#Hand"/>
+    <owl:disjointWith rdf:resource="#Arm"/>
+    <rdfs:label xml:lang="en">Palm</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AnatomicalEntity"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#RightMedius">
+    <owl:disjointWith rdf:resource="#LeftMedius"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Medius"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Right medius</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#AnatomicalEntity">
+    <rdfs:label xml:lang="en">Anatomical entity</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Medius">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#LeftMedius"/>
+          <owl:Class rdf:about="#RightMedius"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="#Digit"/>
+    <rdfs:label xml:lang="en">Medius</rdfs:label>
+    <owl:disjointWith rdf:resource="#LittleFinger"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#RingFinger"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Index"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Thumb"/>
+  </owl:Class>
+  <owl:Class rdf:about="#RightThumb">
+    <rdfs:label xml:lang="en">Right thumb</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Thumb"/>
+    <owl:disjointWith rdf:resource="#LeftThumb"/>
+  </owl:Class>
+  <owl:Class rdf:about="#LeftRingFinger">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#RingFinger"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Left ring finger</rdfs:label>
+    <owl:disjointWith rdf:resource="#RightRingFinger"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Index">
+    <owl:disjointWith rdf:resource="#LittleFinger"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#RingFinger"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Medius"/>
+    <owl:disjointWith rdf:resource="#Thumb"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#LeftIndex"/>
+          <owl:Class rdf:about="#RightIndex"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:label xml:lang="en">Index</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Digit"/>
+  </owl:Class>
+  <owl:Class rdf:about="#RingFinger">
+    <rdfs:subClassOf rdf:resource="#Digit"/>
+    <owl:disjointWith rdf:resource="#LittleFinger"/>
+    <owl:disjointWith rdf:resource="#Medius"/>
+    <owl:disjointWith rdf:resource="#Index"/>
+    <owl:disjointWith rdf:resource="#Thumb"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#LeftRingFinger"/>
+          <owl:Class rdf:about="#RightRingFinger"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ring finger</rdfs:label>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="isDirectPartOf">
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:ID="isPartOf"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hasDirectPart"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasDirectPart">
+    <owl:inverseOf rdf:resource="#isDirectPartOf"/>
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:ID="hasPart"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:TransitiveProperty rdf:about="#isPartOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf>
+      <owl:TransitiveProperty rdf:about="#hasPart"/>
+    </owl:inverseOf>
+  </owl:TransitiveProperty>
+  <owl:TransitiveProperty rdf:about="#hasPart">
+    <owl:inverseOf rdf:resource="#isPartOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:TransitiveProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.3, Build 372)  http://protege.stanford.edu -->

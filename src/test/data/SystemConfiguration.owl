@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.organictechnology.net/ontologies/SystemConfiguration.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.organictechnology.net/ontologies/SystemConfiguration.owl">
+  <owl:Ontology rdf:about="">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This schema ontology outlines system configuration.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="CpuArch">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Software"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Cluster">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="SoftwareSystem"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="File">
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SysvService">
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Kernel">
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SysvStartup">
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Package">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A package of files, folders and setup commands.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Software"/>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Group"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="User"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="#Group">
+    <owl:disjointWith rdf:resource="#Package"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#User"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:about="#User">
+    <rdfs:subClassOf rdf:resource="#Software"/>
+    <owl:disjointWith rdf:resource="#Package"/>
+    <owl:disjointWith rdf:resource="#Group"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Host">
+    <rdfs:subClassOf rdf:resource="#SoftwareSystem"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="hasFile">
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="#File"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="isFileOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isUserOf">
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Cluster"/>
+          <owl:Class rdf:about="#File"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="#User"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasUser"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasHost">
+    <rdfs:range rdf:resource="#Host"/>
+    <rdfs:domain rdf:resource="#Cluster"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="isHostOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isFileOf">
+    <rdfs:domain rdf:resource="#File"/>
+    <rdfs:range rdf:resource="#Package"/>
+    <owl:inverseOf rdf:resource="#hasFile"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isCpuArchOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasCpuArch"/>
+    </owl:inverseOf>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Package"/>
+          <owl:Class rdf:about="#Kernel"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="#CpuArch"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasSysvService">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Package"/>
+          <owl:Class rdf:about="#SysvStartup"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#SysvService"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="isSysvServiceOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isPackageOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasPackage"/>
+    </owl:inverseOf>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Cluster"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="#Package"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isKernelOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasKernel"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Kernel"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Package"/>
+          <owl:Class rdf:about="#Cluster"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasSysvStartup">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="isSysvStartupOf"/>
+    </owl:inverseOf>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Cluster"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#SysvStartup"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isSysvServiceOf">
+    <rdfs:domain rdf:resource="#SysvService"/>
+    <owl:inverseOf rdf:resource="#hasSysvService"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#SysvStartup"/>
+          <owl:Class rdf:about="#Package"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasPackage">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Cluster"/>
+          <owl:Class rdf:about="#Host"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#Package"/>
+    <owl:inverseOf rdf:resource="#isPackageOf"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isHostOf">
+    <rdfs:range rdf:resource="#Cluster"/>
+    <rdfs:domain rdf:resource="#Host"/>
+    <owl:inverseOf rdf:resource="#hasHost"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isGroupOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasGroup"/>
+    </owl:inverseOf>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#User"/>
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Cluster"/>
+          <owl:Class rdf:about="#File"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="#Group"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasGroup">
+    <owl:inverseOf rdf:resource="#isGroupOf"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#User"/>
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Cluster"/>
+          <owl:Class rdf:about="#File"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#Group"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasUser">
+    <owl:inverseOf rdf:resource="#isUserOf"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Cluster"/>
+          <owl:Class rdf:about="#File"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#User"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasCluster">
+    <rdfs:range rdf:resource="#Cluster"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="isClusterOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasCpuArch">
+    <owl:inverseOf rdf:resource="#isCpuArchOf"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Kernel"/>
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Package"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#CpuArch"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isSysvStartupOf">
+    <owl:inverseOf rdf:resource="#hasSysvStartup"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Cluster"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="#SysvStartup"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasKernel">
+    <owl:inverseOf rdf:resource="#isKernelOf"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Host"/>
+          <owl:Class rdf:about="#Cluster"/>
+          <owl:Class rdf:about="#Package"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#Kernel"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isClusterOf">
+    <rdfs:domain rdf:resource="#Cluster"/>
+    <owl:inverseOf rdf:resource="#hasCluster"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="packageProvides">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Package"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="packageBuildRequires">
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="packageGroup">
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="packageObsoletes">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Package"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="packageRequires">
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="packageConflicts">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Package"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="sysvRunlevel">
+    <rdfs:domain rdf:resource="#SysvStartup"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:ID="userId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#User"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="groupId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#Group"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="kernelName">
+    <rdfs:domain rdf:resource="#Kernel"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="packageVersion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Package"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="hostName">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Host"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="clusterName">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Cluster"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The name of the cluster.</rdfs:comment>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="filePath">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#File"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="packageName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="kernelVersion">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Kernel"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="sysvOrder">
+    <rdfs:domain rdf:resource="#SysvStartup"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="groupName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#Group"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Name of the group</rdfs:comment>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="packageURL">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Package"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="packageSummary">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="cpuarchName">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#CpuArch"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="userName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#User"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Name of the user.</rdfs:comment>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="sysvName">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#SysvService"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="packageLicense">
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="packageRelease">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Package"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="kernelAbbrev">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="#Kernel"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:FunctionalProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.3.1, Build 430)  http://protege.stanford.edu -->

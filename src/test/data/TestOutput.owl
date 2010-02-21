@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:sc='http://www.organictechnology.net/owl/SystemConfiguration.owl#'
+  xmlns:owl='http://www.w3.org/2002/07/owl#'
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+>
+  <owl:Ontology rdf:about="#">
+    <owl:imports rdf:resource="http://www.organictechnology.net/owl/SystemConfiguration.owl#"/>
+  </owl:Ontology>
+  <sc:Host rdf:about="#obelisk.bob.sh">
+    <sc:hasKernel>
+      <sc:Kernel rdf:about="#Linux-2.6.22.9-91.fc7">
+        <sc:hasCpuArch rdf:resource="#i686"/>
+        <sc:kernelVersion>2.6.22.9-91.fc7</sc:kernelVersion>
+        <sc:kernelAbbrev>Linux</sc:kernelAbbrev>
+      </sc:Kernel>
+    </sc:hasKernel>
+    <sc:hostName>obelisk.bob.sh</sc:hostName>
+  </sc:Host>
+  <sc:cpuArch rdf:about="#i686">
+    <sc:cpuArchName>i686</sc:cpuArchName>
+  </sc:cpuArch>
+</rdf:RDF>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (C) 2008 by Adrian Hare and Kenneth Barber.
+
+    This file is part of OWLSugar.
+
+    OWLSugar is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OWLSugar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+	File Revision: $Rev$
+-->
+
+<!-- 
+Have mapped figures 1, 2
+-->
+
+<model xmlns="http://organictechnology.net/schema/ObjectModel.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://organictechnology.net/schema/ObjectModel.xsd ObjectModel.xsd ">
+  <!-- Namespace -->
+  <class id="Namespace" primaryAssociation="prefix">
+	<association id="prefix" type="str" minCardinality="0" maxCardinality="1" unique="true"/>
+	<association id="IRI" type="str" minCardinality="1" maxCardinality="1" unique="true"/>  
+  </class>
+  <!-- Ontology -->
+  <class id="Ontology" primaryAssociation="ontologyURI">
+  	<association id="ontologyURI" type="URI" minCardinality="0" maxCardinality="1" unique="true"/>
+  	<association type="Ontology" id="importedOntologies" minCardinality="0" unique="true"/>
+  	<association type="Annotation" id="annotations" minCardinality="0" unique="true"/><association type="Axiom" id="axioms" minCardinality="0" unique="true"/>
+  </class>
+  <class id="URI" primaryAssociation="uri">
+  	<association type="str" id="uri" minCardinality="1" maxCardinality="1"/>
+  </class>
+  <class id="Axiom" abstract="true">
+  	<association type="Annotation" id="annotations" minCardinality="0" unique="true"/>
+  </class>
+  <class id="Annotation" primaryAssociation="annotationURI">
+  	<association type="URI" id="annotationURI" minCardinality="1" maxCardinality="1"/>
+  </class>
+  <class id="AnnotationByConstant" parentage="Annotation">
+  	<association type="Constant" id="annotationValue" minCardinality="1"
+  		maxCardinality="1" headCardinality="1" />
+  </class>
+  <class id="AnnotationByEntity" parentage="Annotation">
+  	<association type="OWLEntity" id="annotationValue"
+  		minCardinality="1" maxCardinality="1" headCardinality="1" />
+  </class>
+  <class id="Constant">
+  	<association type="str" id="value" minCardinality="1" maxCardinality="1"/>
+  	<association type="URI" id="datatypeURI" minCardinality="1" maxCardinality="1"/>
+  </class>
+  <class id="OWLEntity" primaryAssociation="entityURI" abstract="true">
+  	<association type="URI" id="entityURI" minCardinality="1" maxCardinality="1"/>
+  </class>
+  <class id="Description" abstract="true"></class>
+  <class id="DataRange" abstract="true">
+  	<association type="str" id="arity" minCardinality="1" maxCardinality="1"/>
+  </class>
+  <class id="Datatype" parentage="DataRange OWLEntity"/>
+  <class id="ObjectProperty" parentage="OWLEntity"/>
+  <class id="DataProperty" parentage="OWLEntity"/>
+  <class id="Individual" parentage="OWLEntity"/>
+  <class id="OWLClass" parentage="OWLEntity Description"/>
+  <class id="Declaration" parentage="Axiom">
+	<association minCardinality="1" type="OWLEntity" id="entity" maxCardinality="1" headCardinality="1"/>
+  </class>
+
+</model>

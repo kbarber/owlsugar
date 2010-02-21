@@ -1,0 +1,288 @@
+
+@prefix : <http://www.organictechnology.net/ontologies/SystemConfiguration.owl#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+ <http://www.organictechnology.net/ontologies/SystemConfiguration.owl> a owl:Ontology;
+     rdfs:comment "This schema ontology outlines system configuration."^^<http://www.w3.org/2001/XMLSchema#string>. 
+
+ :clusterName a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:comment "The name of the cluster."^^<http://www.w3.org/2001/XMLSchema#string>;
+     rdfs:domain :Cluster;
+     rdfs:range xsd:string. 
+
+ :cpuarchName a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :CpuArch;
+     rdfs:range xsd:string. 
+
+ :filePath a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :File;
+     rdfs:range xsd:string. 
+
+ :groupId a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Group;
+     rdfs:range xsd:int. 
+
+ :groupName a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:comment "Name of the group"^^<http://www.w3.org/2001/XMLSchema#string>;
+     rdfs:domain :Group;
+     rdfs:range xsd:string. 
+
+ :hostName a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Host;
+     rdfs:range xsd:string. 
+
+ :kernelAbbrev a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Kernel;
+     rdfs:range xsd:string. 
+
+ :kernelName a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Kernel;
+     rdfs:range xsd:string. 
+
+ :kernelVersion a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Kernel;
+     rdfs:range xsd:string. 
+
+ :packageBuildRequires a owl:DatatypeProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageConflicts a owl:DatatypeProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageGroup a owl:DatatypeProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageLicense a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageName a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageObsoletes a owl:DatatypeProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageProvides a owl:DatatypeProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageRelease a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageRequires a owl:DatatypeProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageSummary a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageURL a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :packageVersion a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :Package;
+     rdfs:range xsd:string. 
+
+ :sysvName a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :SysvService;
+     rdfs:range xsd:string. 
+
+ :sysvOrder a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :SysvStartup;
+     rdfs:range xsd:int. 
+
+ :sysvRunlevel a owl:DatatypeProperty;
+     rdfs:domain :SysvStartup;
+     rdfs:range xsd:int. 
+
+ :userId a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:domain :User;
+     rdfs:range xsd:int. 
+
+ :userName a owl:DatatypeProperty,
+         owl:FunctionalProperty;
+     rdfs:comment "Name of the user."^^<http://www.w3.org/2001/XMLSchema#string>;
+     rdfs:domain :User;
+     rdfs:range xsd:string. 
+
+ :hasCluster a owl:ObjectProperty;
+     rdfs:range :Cluster;
+     owl:inverseOf :isClusterOf. 
+
+ :hasCpuArch a owl:ObjectProperty;
+     rdfs:domain [ a owl:Class;
+             owl:unionOf ( :Kernel :Host :Package )];
+     rdfs:range :CpuArch;
+     owl:inverseOf :isCpuArchOf. 
+
+ :hasFile a owl:ObjectProperty;
+     rdfs:domain :Package;
+     rdfs:range :File;
+     owl:inverseOf :isFileOf. 
+
+ :hasGroup a owl:ObjectProperty;
+     rdfs:domain [ a owl:Class;
+             owl:unionOf ( :User :Host :Cluster :File )];
+     rdfs:range :Group;
+     owl:inverseOf :isGroupOf. 
+
+ :hasHost a owl:ObjectProperty;
+     rdfs:domain :Cluster;
+     rdfs:range :Host;
+     owl:inverseOf :isHostOf. 
+
+ :hasKernel a owl:ObjectProperty;
+     rdfs:domain [ a owl:Class;
+             owl:unionOf ( :Host :Cluster :Package )];
+     rdfs:range :Kernel;
+     owl:inverseOf :isKernelOf. 
+
+ :hasPackage a owl:ObjectProperty;
+     rdfs:domain [ a owl:Class;
+             owl:unionOf ( :Cluster :Host )];
+     rdfs:range :Package;
+     owl:inverseOf :isPackageOf. 
+
+ :hasSysvService a owl:ObjectProperty;
+     rdfs:domain [ a owl:Class;
+             owl:unionOf ( :Package :SysvStartup )];
+     rdfs:range :SysvService;
+     owl:inverseOf :isSysvServiceOf. 
+
+ :hasSysvStartup a owl:ObjectProperty;
+     rdfs:domain [ a owl:Class;
+             owl:unionOf ( :Host :Cluster )];
+     rdfs:range :SysvStartup;
+     owl:inverseOf :isSysvStartupOf. 
+
+ :hasUser a owl:ObjectProperty;
+     rdfs:domain [ a owl:Class;
+             owl:unionOf ( :Host :Cluster :File )];
+     rdfs:range :User;
+     owl:inverseOf :isUserOf. 
+
+ :isClusterOf a owl:ObjectProperty;
+     rdfs:domain :Cluster;
+     owl:inverseOf :hasCluster. 
+
+ :isCpuArchOf a owl:ObjectProperty;
+     rdfs:domain :CpuArch;
+     rdfs:range [ a owl:Class;
+             owl:unionOf ( :Host :Package :Kernel )];
+     owl:inverseOf :hasCpuArch. 
+
+ :isFileOf a owl:ObjectProperty;
+     rdfs:domain :File;
+     rdfs:range :Package;
+     owl:inverseOf :hasFile. 
+
+ :isGroupOf a owl:ObjectProperty;
+     rdfs:domain :Group;
+     rdfs:range [ a owl:Class;
+             owl:unionOf ( :User :Host :Cluster :File )];
+     owl:inverseOf :hasGroup. 
+
+ :isHostOf a owl:ObjectProperty;
+     rdfs:domain :Host;
+     rdfs:range :Cluster;
+     owl:inverseOf :hasHost. 
+
+ :isKernelOf a owl:ObjectProperty;
+     rdfs:domain :Kernel;
+     rdfs:range [ a owl:Class;
+             owl:unionOf ( :Host :Package :Cluster )];
+     owl:inverseOf :hasKernel. 
+
+ :isPackageOf a owl:ObjectProperty;
+     rdfs:domain :Package;
+     rdfs:range [ a owl:Class;
+             owl:unionOf ( :Host :Cluster )];
+     owl:inverseOf :hasPackage. 
+
+ :isSysvServiceOf a owl:ObjectProperty;
+     rdfs:domain :SysvService;
+     rdfs:range [ a owl:Class;
+             owl:unionOf ( :SysvStartup :Package )];
+     owl:inverseOf :hasSysvService. 
+
+ :isSysvStartupOf a owl:ObjectProperty;
+     rdfs:domain :SysvStartup;
+     rdfs:range [ a owl:Class;
+             owl:unionOf ( :Host :Cluster )];
+     owl:inverseOf :hasSysvStartup. 
+
+ :isUserOf a owl:ObjectProperty;
+     rdfs:domain :User;
+     rdfs:range [ a owl:Class;
+             owl:unionOf ( :Host :Cluster :File )];
+     owl:inverseOf :hasUser. 
+
+ :SoftwareSystem a owl:Class. 
+
+ :CpuArch a owl:Class;
+     rdfs:subClassOf :Software. 
+
+ :SysvService a owl:Class;
+     rdfs:subClassOf :Software. 
+
+ :Group a owl:Class;
+     rdfs:subClassOf :Software;
+     owl:disjointWith :Package,
+         :User. 
+
+ :SysvStartup a owl:Class;
+     rdfs:subClassOf :Software. 
+
+ :File a owl:Class;
+     rdfs:subClassOf :Software. 
+
+ :Kernel a owl:Class;
+     rdfs:subClassOf :Software. 
+
+ :Software a owl:Class. 
+
+ :User a owl:Class;
+     rdfs:subClassOf :Software;
+     owl:disjointWith :Group,
+         :Package. 
+
+ :Cluster a owl:Class;
+     rdfs:subClassOf :SoftwareSystem. 
+
+ :Host a owl:Class;
+     rdfs:subClassOf :SoftwareSystem. 
+
+ :Package a owl:Class;
+     rdfs:comment "A package of files, folders and setup commands."^^<http://www.w3.org/2001/XMLSchema#string>;
+     rdfs:subClassOf :Software;
+     owl:disjointWith :Group,
+         :User. 

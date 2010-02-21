@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (C) 2008 by Adrian Hare and Kenneth Barber.
+
+    This file is part of OWLSugar.
+
+    OWLSugar is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OWLSugar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+	File Revision: $Rev$
+-->
+
+<!-- 
+	This XSD defines a normalised layout or schema. It was designed around
+	the data model used by the OWL 1.1 guys and is therefore a very cut-down
+	UML style model.
+	
+	The idea was to remove the model declaration away from code, and use 
+	dynamic methods to create classes and methods. Please read the inline 
+	comments to understand the structure.
+	
+	(One day this model may be extended and seperated from OWLSugar. I can see
+	its usefullness indepedant from this particular job. If anyone manages to 
+	turn this into its own library - please let	us know. -kb)
+-->
+
+<schema	
+	targetNamespace="http://organictechnology.net/schema/ObjectModel.xsd"
+	elementFormDefault="qualified" 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:mdl="http://organictechnology.net/schema/ObjectModel.xsd">
+
+<!-- TODO: Think about converting the descriptions to be XHTML fragments. 
+		Either that - or some other annotation standard. -kb -->
+
+	<element name="model" type="mdl:ObjectModelType"></element>
+
+	<complexType name="AssociationType">
+		<sequence>
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="id" type="string" use="required"></attribute>
+		<attribute name="type" type="IDREF" use="required"></attribute>
+		<attribute name="minCardinality" type="nonNegativeInteger"
+			use="required">
+		</attribute>
+		<attribute name="maxCardinality" type="positiveInteger"></attribute>
+		<attribute name="unique" type="boolean"></attribute>
+		<attribute name="headCardinality" type="positiveInteger"></attribute>
+	</complexType>
+
+	<complexType name="ClassType">
+		<sequence>
+		
+			<!-- attribute: Classes have many attributes. These will be used
+					to generate the access methods for this class. -->
+			<element name="association" type="mdl:AssociationType"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+			
+			<!-- description: Description of this class. -->
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+		</sequence>
+		
+		<!-- id: The unique name for this class. It will be the name that 
+				instances or individuals will be initialised from. -->
+		<attribute name="id" type="ID" use="required"></attribute>
+		
+		<!-- parentage: Classes (that are defined in this model) that this 
+				class inherits from. Similar principals to parents or supers
+				in most object oriented models. -->
+		<attribute name="parentage" type="IDREFS"></attribute>
+		
+		<!-- primaryAssociation: The default attribute that acts as the unique 
+				or primary key attribute for this class. Similar principals as
+				the primary key for a table in a relational database. -->
+		<attribute name="primaryAssociation" type="string"></attribute>
+		
+		<!-- abstract: An abstract class cannot be instantiated directly, only
+				inherited from. Similar principals as the Java class type 
+				"abstract". -->
+		<attribute name="abstract" type="boolean"></attribute>
+	</complexType>
+
+	<!-- objectModelType: The root XML node for a model. -->
+	<complexType name="ObjectModelType">
+		<sequence>
+
+			<!-- class: Models have many classes. -->
+
+			<!-- description: A description for this entire model. This is 
+				apposed to just a comment, because then it can be used 
+				programmatically. Its basically an annotation. -->
+            <element name="description" type="string" maxOccurs="1" minOccurs="0">
+			</element>
+            <element name="class" type="mdl:ClassType" maxOccurs="unbounded" minOccurs="1">
+			</element>
+        </sequence>
+	</complexType>
+
+
+
+
+
+
+
+
+
+
+</schema>

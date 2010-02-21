@@ -1,0 +1,21 @@
+
+@prefix _8: <<stdin>#>.
+@prefix _9: <<>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix sc: <http://www.organictechnology.net/owl/SystemConfiguration.owl#>.
+
+ _9:stdin># a owl:Ontology;
+     owl:imports <http://www.organictechnology.net/owl/SystemConfiguration.owl#>. 
+
+ <<stdin>#obelisk.bob.sh> a sc:Host;
+     sc:hasKernel <<stdin>#Linux-2.6.22.9-91.fc7>;
+     sc:hostName "obelisk.bob.sh". 
+
+ <<stdin>#Linux-2.6.22.9-91.fc7> a sc:Kernel;
+     sc:hasCpuArch _8:i686;
+     sc:kernelAbbrev "Linux";
+     sc:kernelVersion "2.6.22.9-91.fc7". 
+
+ _8:i686 a sc:cpuArch;
+     sc:cpuArchName "i686". 

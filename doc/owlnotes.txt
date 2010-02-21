@@ -1,0 +1,59 @@
+This file is designed to contain some notes regarding the OWL 1.1 
+specifications that are being ratified. These include gotcha's - ambiguities -
+and plain old "bugs".
+
+Functions/Objects to be aware of    	  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When analyzing the Syntax specification, there are ambiguities regarding the
+differences between the Structural model and the Functional model. The 
+following functions are what I would consider "special cases".
+    	  
+- URI: its a terminal - so it actually _is_ data. It does have constraint of
+	its own - defined by being either an RFC3897 IRI or a "CURRIE" (defined
+	by the W3C. See section 2.2 of the Syntax guide.
+- Constant: Again - a terminal - contains data - but also has an optional complex 
+	relationship (datatypeURI). It also has a language option - not shown in the
+	structural representation. The constraints around this data are defined
+	in section 4.1 of the Syntax guide.	
+- Namespace: Actually defined functionally but not structurally. It is the only
+	function that sites outside of the Ontology, being that it is treated 
+	specially when OWL translates to N3 or XML.
+- Label: A label is an Annotation with a pre-defined URI set to rdf:label. 
+  	It is represented as a function, however not listed structurally. Really,
+  	it is more of a child of Annotation - with its annotationURI pre-set.
+- Comment: A comment is an annotation with a pre-defined URI set to rdf:comment.
+	It is represented as a function, however not listed structurally. Really,
+  	it is more of a child of Annotation - with its annotationURI pre-set.
+- Datatype: Represented structurally, but its not a terminal function. Its really
+	just a URI, but it it usually an enumeration of the standard XSD data types.
+- DatatypeRestriction: This is a customisation on top of a datatype that adds
+	a variation to the ordinary <<set>> <<list>> stereo types called 
+	"facetType". This seems to be because it would be messy to draw all of the
+	possibly relationship types into the diagram ... you should probably treat
+	each of the facets as an optional argument ... with a cardinality of 1 for
+	each.
+- DataRange: While arity is defined structurally - I can't find how it is 
+	defined functionally. I'm not even 100% on what arity is for - it seems to 
+	represent how many of this "DataType" is required ... not sure ??
+
+Predefined or Implicit Objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These are implicit "instances" of OWl functions that need no mention when 
+serialised - yet none-the-less really do exist and must be represented
+internally by tooling.
+
+Namespace:
+ - rdf
+ - rdfs
+ - xsd
+ - owl
+ - owl11
+ - owl11xml
+OWLClass:
+ - owl:Thing
+ - owl:Nothing
+
+    	  
+    	  
